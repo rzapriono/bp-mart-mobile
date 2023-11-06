@@ -220,6 +220,8 @@ class ShopItem {
 
 Setelah mengerjakan step by step dan bonus di atas, tampilan dari aplikasi flutter yang telah dibuat akan terlihat seperti berikut.
 
+<img width="1280" alt="Screenshot 2023-11-06 105128" src="https://github.com/rzapriono/bp-mart-mobile/assets/107228573/9c61a81d-8604-4b11-aad0-d95024aacaa5">
+
 
 ## Apa perbedaan utama antara stateless dan stateful widget dalam konteks pengembangan aplikasi Flutter?
 Stateless dan stateful widget adalah dua jenis widget yang digunakan dalam pengembangan aplikasi Flutter. Perbedaan utama antara keduanya terletak pada bagaimana widget tersebut mengelola dan merespons perubahan data atau state (keadaan) pada aplikasi Flutter.
