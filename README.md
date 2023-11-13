@@ -683,6 +683,8 @@ ListTile(
 ```
 
 Setelah semua step dikerjakan, tampilan aplikasi flutter akan terlihat seperti berikut.
+<img width="946" alt="Screenshot 2023-11-13 124558" src="https://github.com/rzapriono/bp-mart-mobile/assets/107228573/a0a3810f-f636-43bf-865b-631c94c2413b">
+
 
 
 ## Jelaskan perbedaan antara `Navigator.push()` dan `Navigator.pushReplacement()`, disertai dengan contoh mengenai penggunaan kedua metode tersebut yang tepat!
