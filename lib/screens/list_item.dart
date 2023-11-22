@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:bp_mart/screens/detail_item.dart';
-import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:bp_mart/models/item.dart';
+import 'package:bp_mart/screens/detail_item.dart';
 import 'package:bp_mart/widgets/left_drawer.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
 import 'package:provider/provider.dart';
@@ -16,24 +15,15 @@ class ProductPage extends StatefulWidget {
 
 class _ProductPageState extends State<ProductPage> {
   Future<List<Item>> fetchProduct(CookieRequest request) async {
-    // TODO: Ganti URL dan jangan lupa tambahkan trailing slash (/) di akhir URL!
-//     final response = await request.postJson(
-//                                 "http://127.0.0.1:8000/auth/get-item/",
-//                                 jsonEncode(<String, String>{
-//                                     'name':'bait',
-//                                 }));
-    var url = Uri.parse('http://127.0.0.1:8000/json/');
-    var response = await http.get(
-      url,
-      headers: {"Content-Type": "application/json"},
-    );
-
-    // melakukan decode response menjadi bentuk json
-    var data = jsonDecode(utf8.decode(response.bodyBytes));
+    final response = await request.postJson(
+        "http://127.0.0.1:8000/get-item/",
+        jsonEncode(<String, String>{
+          'name': 'bait',
+        }));
 
     // melakukan konversi data json menjadi object Product
     List<Item> list_product = [];
-    for (var d in data) {
+    for (var d in response) {
       if (d != null) {
         list_product.add(Item.fromJson(d));
       }
@@ -65,7 +55,7 @@ class _ProductPageState extends State<ProductPage> {
                   return const Column(
                     children: [
                       Text(
-                        "Tidak ada data item.",
+                        "Tidak ada data Item.",
                         style:
                             TextStyle(color: Color(0xff59A5D8), fontSize: 20),
                       ),
@@ -76,24 +66,27 @@ class _ProductPageState extends State<ProductPage> {
                   return ListView.builder(
                       itemCount: snapshot.data!.length,
                       itemBuilder: (_, index) => Container(
-                            margin: const EdgeInsets.symmetric(
-                                horizontal: 16, vertical: 12),
-                            padding: const EdgeInsets.all(20.0),
+                          margin: const EdgeInsets.symmetric(
+                              horizontal: 16, vertical: 12),
+                          padding: const EdgeInsets.all(20.0),
+                          child: InkWell(
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.start,
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  "${index + 1}. ${snapshot.data![index].fields.itemName}",
+                                  "${index + 1}. ${snapshot.data![index].fields.name}",
                                   style: const TextStyle(
                                     fontSize: 18.0,
                                     fontWeight: FontWeight.bold,
                                   ),
                                 ),
-                                Text("${snapshot.data![index].fields.amount}"),
                                 const SizedBox(height: 10),
                                 Text(
-                                    "${snapshot.data![index].fields.description}"),
+                                    "Amount: ${snapshot.data![index].fields.amount}"),
+                                const SizedBox(height: 10),
+                                Text(
+                                    "Description: ${snapshot.data![index].fields.description}"),
                                 ElevatedButton(
                                   onPressed: () {
                                     Navigator.push(
@@ -105,10 +98,10 @@ class _ProductPageState extends State<ProductPage> {
                                     );
                                   },
                                   child: const Text('Detail Item'),
-                                )
+                                ),
                               ],
                             ),
-                          ));
+                          )));
                 }
               }
             }));
