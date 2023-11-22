@@ -1,7 +1,7 @@
+import 'package:bp_mart/screens/list_item.dart';
 import 'package:flutter/material.dart';
 import 'package:bp_mart/screens/menu.dart';
 import 'package:bp_mart/screens/itemlist_form.dart';
-import 'package:bp_mart/screens/itemlist.dart';
 
 class LeftDrawer extends StatelessWidget {
   const LeftDrawer({super.key});
@@ -53,15 +53,14 @@ class LeftDrawer extends StatelessWidget {
             },
           ),
           ListTile(
-            leading: const Icon(Icons.checklist),
-            title: const Text('Lihat Produk'),
-            // Bagian redirection ke ItemFormPage
+            leading: const Icon(Icons.shopping_basket),
+            title: const Text('Daftar Produk'),
             onTap: () {
-              Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const ItemListPage(),
-                  ));
+              // Route menu ke halaman produk
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const ProductPage()),
+              );
             },
           ),
           ListTile(
